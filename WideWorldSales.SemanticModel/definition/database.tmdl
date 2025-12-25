@@ -1,4 +1,3 @@
-database WideWorldSales
-
-	annotation PBI_QueryOrder = 0
+database
+	compatibilityLevel: 1600
 

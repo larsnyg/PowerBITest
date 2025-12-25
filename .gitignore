@@ -1,7 +1,10 @@
 # Power BI Cache and Local Files
-**/.pbi/cache.abf
-**/.pbi/unappliedChanges.json
-**/.pbi/editorSettings.json
+**/.pbi/
+
+# Authentication tokens (NEVER commit!)
+*.token
+.env
+.token
 
 # OS Files
 .DS_Store

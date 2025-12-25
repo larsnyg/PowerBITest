@@ -3,7 +3,7 @@ table OrderLines
 
 	column OrderLineID
 		dataType: int64
-		isAvailable: false
+		isHidden
 		formatString: 0
 		lineageTag: 9c0d1e2f-3a4b-5c6d-7e8f-9a0b1c2d3e4f
 		summarizeBy: none
@@ -13,7 +13,7 @@ table OrderLines
 
 	column OrderID
 		dataType: int64
-		isAvailable: false
+		isHidden
 		formatString: 0
 		lineageTag: 0d1e2f3a-4b5c-6d7e-8f9a-0b1c2d3e4f5a
 		summarizeBy: none
@@ -23,7 +23,7 @@ table OrderLines
 
 	column StockItemID
 		dataType: int64
-		isAvailable: false
+		isHidden
 		formatString: 0
 		lineageTag: 1e2f3a4b-5c6d-7e8f-9a0b-1c2d3e4f5a6b
 		summarizeBy: none

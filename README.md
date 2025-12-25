@@ -129,22 +129,75 @@ To open and edit this project, you need:
 
 ## Deploying to Fabric
 
-This project can be deployed directly to Microsoft Fabric:
+This project includes native macOS deployment scripts (bash + Python):
 
-### Windows
-```powershell
-.\Deploy-ToFabric.ps1 -WorkspaceName "Your Workspace Name"
+### Option 1: Python REST API Deployment (Recommended for Initial Setup)
+Deploy directly using Python and Fabric REST APIs:
+
+```bash
+./deploy-to-fabric.py "Your Workspace Name"
 ```
 
-### macOS/Linux
-Due to PowerShell console compatibility issues on macOS, use the manual deployment guide:
-```powershell
-# See DEPLOY-MANUALLY.md for step-by-step instructions
+**Features**:
+- ✅ Pure Python (built-in libraries only: urllib, json, base64)
+- ✅ Uploads full TMDL and PBIR definitions
+- ✅ Handles async creation with polling
+- ✅ Cross-platform (macOS, Linux, Windows)
+
+**Prerequisites**: `brew install azure-cli`
+
+### Option 2: Git Sync (For Updates After Initial Deployment)
+Connect your Fabric workspace to Git and sync changes:
+
+1. **Push changes to Git:**
+   ```bash
+   git add .
+   git commit -m "Update model"
+   git push origin main
+   ```
+
+2. **Sync to Fabric:**
+   ```bash
+   ./sync-from-git.sh "your-workspace-guid"
+
+   # With specific commit:
+   ./sync-from-git.sh "workspace-id" "commit-hash"
+
+   # With conflict resolution:
+   ./sync-from-git.sh "workspace-id" "HEAD" "PreferWorkspace"
+   ```
+
+**Prerequisites**:
+- Items must exist in workspace (use Option 1 first)
+- Workspace connected to Git repository
+- `brew install azure-cli jq`
+
+### Helper Scripts
+
+```bash
+# Find your workspace ID
+./get-workspace-id.sh
+
+# Filter workspaces by name
+./get-workspace-id.sh "PowerBI"
+
+# Check Git integration status
+./get-git-status.sh "your-workspace-id"
+
+# Clear authentication cache (troubleshooting)
+./clear-auth-cache.sh
 ```
+
+**All scripts are native bash** - no PowerShell required!
+
+**Prerequisites**:
+- Azure CLI: `brew install azure-cli`
+- jq (JSON processor): `brew install jq`
 
 **Documentation:**
-- [FABRIC-DEPLOYMENT.md](FABRIC-DEPLOYMENT.md) - Automated deployment (Windows)
-- [DEPLOY-MANUALLY.md](DEPLOY-MANUALLY.md) - Manual deployment (macOS/Linux)
+- [DEPLOYMENT-SUMMARY.md](DEPLOYMENT-SUMMARY.md) - Complete deployment overview
+- [GIT-SYNC-GUIDE.md](GIT-SYNC-GUIDE.md) - Git integration and sync guide
+- [FABRIC-DEPLOYMENT.md](FABRIC-DEPLOYMENT.md) - Detailed deployment information
 
 ## Opening the Project
 

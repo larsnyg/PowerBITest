@@ -1,51 +1,41 @@
-// Relationship from Orders to Customers
-relationship 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d
+relationship '1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d'
 	fromColumn: Orders.CustomerID
 	toColumn: Customers.CustomerID
 
-// Relationship from OrderLines to Orders
-relationship 2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e
+relationship '2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e'
 	fromColumn: OrderLines.OrderID
 	toColumn: Orders.OrderID
 
-// Relationship from OrderLines to StockItems
-relationship 3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f
+relationship '3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f'
 	fromColumn: OrderLines.StockItemID
 	toColumn: StockItems.StockItemID
 
-// Relationship from Orders to People (Salesperson)
-relationship 4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a
+relationship '4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a'
 	fromColumn: Orders.SalespersonPersonID
 	toColumn: People.PersonID
 
-// Relationship from Invoices to Customers
-relationship 5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b
+relationship '5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b'
 	fromColumn: Invoices.CustomerID
 	toColumn: Customers.CustomerID
 
-// Relationship from InvoiceLines to Invoices
-relationship 6f7a8b9c-0d1e-2f3a-4b5c-6d7e8f9a0b1c
+relationship '6f7a8b9c-0d1e-2f3a-4b5c-6d7e8f9a0b1c'
 	fromColumn: InvoiceLines.InvoiceID
 	toColumn: Invoices.InvoiceID
 
-// Relationship from InvoiceLines to StockItems
-relationship 7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d
+relationship '7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d'
 	fromColumn: InvoiceLines.StockItemID
 	toColumn: StockItems.StockItemID
 
-// Relationship from Invoices to People (Salesperson)
-relationship 8b9c0d1e-2f3a-4b5c-6d7e-8f9a0b1c2d3e
+relationship '8b9c0d1e-2f3a-4b5c-6d7e-8f9a0b1c2d3e'
 	fromColumn: Invoices.SalespersonPersonID
 	toColumn: People.PersonID
 
-// Relationship from Orders to Calendar (Active, Both Directions)
-relationship 9c0d1e2f-3a4b-5c6d-7e8f-9a0b1c2d3e4f
+relationship '9c0d1e2f-3a4b-5c6d-7e8f-9a0b1c2d3e4f'
 	crossFilteringBehavior: bothDirections
 	fromColumn: Orders.OrderDate
 	toColumn: Calendar.Date
 
-// Relationship from Invoices to Calendar (Inactive)
-relationship 0d1e2f3a-4b5c-6d7e-8f9a-0b1c2d3e4f5a
+relationship '0d1e2f3a-4b5c-6d7e-8f9a-0b1c2d3e4f5a'
 	isActive: false
 	fromColumn: Invoices.InvoiceDate
 	toColumn: Calendar.Date

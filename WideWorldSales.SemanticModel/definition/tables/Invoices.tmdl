@@ -3,7 +3,7 @@ table Invoices
 
 	column InvoiceID
 		dataType: int64
-		isAvailable: false
+		isHidden
 		formatString: 0
 		lineageTag: 8f9a0b1c-2d3e-4f5a-6b7c-8d9e0f1a2b3c
 		summarizeBy: none
@@ -13,7 +13,7 @@ table Invoices
 
 	column CustomerID
 		dataType: int64
-		isAvailable: false
+		isHidden
 		formatString: 0
 		lineageTag: 9a0b1c2d-3e4f-5a6b-7c8d-9e0f1a2b3c4d
 		summarizeBy: none
@@ -23,7 +23,7 @@ table Invoices
 
 	column OrderID
 		dataType: int64
-		isAvailable: false
+		isHidden
 		formatString: 0
 		lineageTag: 0b1c2d3e-4f5a-6b7c-8d9e-0f1a2b3c4d5e
 		summarizeBy: none
@@ -33,7 +33,7 @@ table Invoices
 
 	column SalespersonPersonID
 		dataType: int64
-		isAvailable: false
+		isHidden
 		formatString: 0
 		lineageTag: 1c2d3e4f-5a6b-7c8d-9e0f-1a2b3c4d5e6f
 		summarizeBy: none
