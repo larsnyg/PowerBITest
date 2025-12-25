@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.0.0/schema.json",
+  "config": "{\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU06\",\"version\":\"5.51\",\"type\":2}}}",
+  "resourcePackages": [],
+  "culture": "en-US",
+  "defaultScreenshotIndex": 0,
+  "screenshots": []
+}

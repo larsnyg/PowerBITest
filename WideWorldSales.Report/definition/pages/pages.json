@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pages/1.0.0/schema.json",
+  "pages": [
+    {
+      "name": "SalesOverview",
+      "displayName": "Sales Overview"
+    }
+  ]
+}

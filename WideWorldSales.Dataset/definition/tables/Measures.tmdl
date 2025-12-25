@@ -1,0 +1,72 @@
+table Measures
+	lineageTag: 1e2f3a4b-5c6d-7e8f-9a0b-1c2d3e4f5a6b
+
+	measure 'Total Revenue' =
+			SUMX(
+			    InvoiceLines,
+			    InvoiceLines[Quantity] * InvoiceLines[UnitPrice]
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 2f3a4b5c-6d7e-8f9a-0b1c-2d3e4f5a6b7c
+
+	measure 'Total Profit' = SUM(InvoiceLines[LineProfit])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d
+
+	measure 'Total Quantity Sold' = SUM(InvoiceLines[Quantity])
+		formatString: #,0
+		lineageTag: 4b5c6d7e-8f9a-0b1c-2d3e-4f5a6b7c8d9e
+
+	measure 'Profit Margin %' =
+			DIVIDE(
+			    [Total Profit],
+			    [Total Revenue],
+			    0
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 5c6d7e8f-9a0b-1c2d-3e4f-5a6b7c8d9e0f
+
+	measure 'Total Invoices' = DISTINCTCOUNT(Invoices[InvoiceID])
+		formatString: #,0
+		lineageTag: 6d7e8f9a-0b1c-2d3e-4f5a-6b7c8d9e0f1a
+
+	measure 'Total Customers' = DISTINCTCOUNT(Customers[CustomerID])
+		formatString: #,0
+		lineageTag: 7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b
+
+	measure 'Average Order Value' =
+			DIVIDE(
+			    [Total Revenue],
+			    [Total Invoices],
+			    0
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 8f9a0b1c-2d3e-4f5a-6b7c-8d9e0f1a2b3c
+
+	measure 'Revenue YoY Growth %' =
+			VAR CurrentYearRevenue = [Total Revenue]
+			VAR PreviousYearRevenue =
+			    CALCULATE(
+			        [Total Revenue],
+			        DATEADD(Calendar[Date], -1, YEAR)
+			    )
+			RETURN
+			    DIVIDE(
+			        CurrentYearRevenue - PreviousYearRevenue,
+			        PreviousYearRevenue,
+			        0
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 9a0b1c2d-3e4f-5a6b-7c8d-9e0f1a2b3c4d
+
+	partition Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Measure Table" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Measure Table", type text}})
+				in
+				    #"Changed Type"
+
+		annotation PBI_ResultType = Table
+

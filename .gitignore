@@ -1,0 +1,24 @@
+# Power BI Cache and Local Files
+**/.pbi/cache.abf
+**/.pbi/unappliedChanges.json
+**/.pbi/editorSettings.json
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Power BI Backup Files
+*.pbix.backup
+*.pbix~
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Windows
+desktop.ini

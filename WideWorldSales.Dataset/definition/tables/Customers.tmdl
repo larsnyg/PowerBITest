@@ -1,0 +1,96 @@
+table Customers
+	lineageTag: a8b9c1d2-e3f4-5a6b-7c8d-9e0f1a2b3c4d
+
+	column CustomerID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: c1d2e3f4-a5b6-c7d8-e9f0-1a2b3c4d5e6f
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		lineageTag: d2e3f4a5-b6c7-d8e9-f0a1-b2c3d4e5f6a7
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerCategoryID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: e3f4a5b6-c7d8-e9f0-a1b2-c3d4e5f6a7b8
+		summarizeBy: none
+		sourceColumn: CustomerCategoryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeliveryCityID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: f4a5b6c7-d8e9-f0a1-b2c3-d4e5f6a7b8c9
+		summarizeBy: none
+		sourceColumn: DeliveryCityID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditLimit
+		dataType: decimal
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a5b6c7d8-e9f0-a1b2-c3d4-e5f6a7b8c9d0
+		summarizeBy: sum
+		sourceColumn: CreditLimit
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountOpenedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b6c7d8e9-f0a1-b2c3-d4e5-f6a7b8c9d0e1
+		summarizeBy: none
+		sourceColumn: AccountOpenedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column StandardDiscountPercentage
+		dataType: decimal
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c7d8e9f0-a1b2-c3d4-e5f6-a7b8c9d0e1f2
+		summarizeBy: sum
+		sourceColumn: StandardDiscountPercentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: d8e9f0a1-b2c3-d4e5-f6a7-b8c9d0e1f2a3
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeliveryAddressLine1
+		dataType: string
+		lineageTag: e9f0a1b2-c3d4-e5f6-a7b8-c9d0e1f2a3b4
+		summarizeBy: none
+		sourceColumn: DeliveryAddressLine1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customers = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("sql1.orb.local,1433", "WideWorldImporters-Full"),
+				    dbo_Customers = Source{[Schema="Sales",Item="Customers"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dbo_Customers,{"BillToCustomerID", "BuyingGroupID", "PrimaryContactPersonID", "AlternateContactPersonID", "DeliveryMethodID", "PostalCityID", "IsStatementSent", "IsOnCreditHold", "PaymentDays", "FaxNumber", "DeliveryRun", "RunPosition", "WebsiteURL", "DeliveryAddressLine2", "DeliveryPostalCode", "DeliveryLocation", "PostalAddressLine1", "PostalAddressLine2", "PostalPostalCode", "LastEditedBy", "ValidFrom", "ValidTo"})
+				in
+				    #"Removed Columns"
+
+		annotation PBI_ResultType = Table
+

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "SalesOverview",
+  "displayName": "Sales Overview",
+  "width": 1280,
+  "height": 720,
+  "displayOption": 1,
+  "verticalAlignment": 0,
+  "background": {
+    "color": {
+      "solid": {
+        "color": "#FFFFFF"
+      }
+    },
+    "transparency": 0
+  },
+  "config": "{}",
+  "filters": "[]",
+  "visualContainers": [
+    {
+      "name": "TotalRevenueCard",
+      "x": 20,
+      "y": 20,
+      "z": 1000,
+      "width": 280,
+      "height": 120,
+      "config": "{\"name\":\"TotalRevenueCard\",\"layouts\":[{\"id\":0,\"position\":{\"x\":20,\"y\":20,\"z\":1000,\"width\":280,\"height\":120}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Measures.Total Revenue\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"Measures\"}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Revenue\"},\"Name\":\"Measures.Total Revenue\"}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Total Revenue'\"}}}}}]}}}"
+    },
+    {
+      "name": "TotalProfitCard",
+      "x": 320,
+      "y": 20,
+      "z": 1001,
+      "width": 280,
+      "height": 120,
+      "config": "{\"name\":\"TotalProfitCard\",\"layouts\":[{\"id\":0,\"position\":{\"x\":320,\"y\":20,\"z\":1001,\"width\":280,\"height\":120}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Measures.Total Profit\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"Measures\"}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Profit\"},\"Name\":\"Measures.Total Profit\"}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Total Profit'\"}}}}}]}}}"
+    },
+    {
+      "name": "ProfitMarginCard",
+      "x": 620,
+      "y": 20,
+      "z": 1002,
+      "width": 280,
+      "height": 120,
+      "config": "{\"name\":\"ProfitMarginCard\",\"layouts\":[{\"id\":0,\"position\":{\"x\":620,\"y\":20,\"z\":1002,\"width\":280,\"height\":120}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Measures.Profit Margin %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"Measures\"}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Profit Margin %\"},\"Name\":\"Measures.Profit Margin %\"}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Profit Margin %'\"}}}}}]}}}"
+    },
+    {
+      "name": "TotalCustomersCard",
+      "x": 920,
+      "y": 20,
+      "z": 1003,
+      "width": 280,
+      "height": 120,
+      "config": "{\"name\":\"TotalCustomersCard\",\"layouts\":[{\"id\":0,\"position\":{\"x\":920,\"y\":20,\"z\":1003,\"width\":280,\"height\":120}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Measures.Total Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"Measures\"}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Customers\"},\"Name\":\"Measures.Total Customers\"}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Total Customers'\"}}}}}]}}}"
+    },
+    {
+      "name": "RevenueByMonth",
+      "x": 20,
+      "y": 160,
+      "z": 2000,
+      "width": 600,
+      "height": 300,
+      "config": "{\"name\":\"RevenueByMonth\",\"layouts\":[{\"id\":0,\"position\":{\"x\":20,\"y\":160,\"z\":2000,\"width\":600,\"height\":300}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Calendar.YearMonth\"}],\"Y\":[{\"queryRef\":\"Measures.Total Revenue\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Calendar\"},{\"Name\":\"m\",\"Entity\":\"Measures\"}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"YearMonth\"},\"Name\":\"Calendar.YearMonth\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Revenue\"},\"Name\":\"Measures.Total Revenue\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"YearMonth\"}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Revenue Trend by Month'\"}}}}}]}}}"
+    },
+    {
+      "name": "TopCustomers",
+      "x": 640,
+      "y": 160,
+      "z": 2001,
+      "width": 560,
+      "height": 300,
+      "config": "{\"name\":\"TopCustomers\",\"layouts\":[{\"id\":0,\"position\":{\"x\":640,\"y\":160,\"z\":2001,\"width\":560,\"height\":300}}],\"singleVisual\":{\"visualType\":\"barChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Customers.CustomerName\"}],\"Y\":[{\"queryRef\":\"Measures.Total Revenue\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Customers\"},{\"Name\":\"m\",\"Entity\":\"Measures\"}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"CustomerName\"},\"Name\":\"Customers.CustomerName\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Revenue\"},\"Name\":\"Measures.Total Revenue\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Revenue\"}}}],\"Top\":10},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Top 10 Customers by Revenue'\"}}}}}]}}}"
+    },
+    {
+      "name": "ProductSales",
+      "x": 20,
+      "y": 480,
+      "z": 3000,
+      "width": 1180,
+      "height": 220,
+      "config": "{\"name\":\"ProductSales\",\"layouts\":[{\"id\":0,\"position\":{\"x\":20,\"y\":480,\"z\":3000,\"width\":1180,\"height\":220}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"StockItems.StockItemName\"},{\"queryRef\":\"Measures.Total Quantity Sold\"},{\"queryRef\":\"Measures.Total Revenue\"},{\"queryRef\":\"Measures.Total Profit\"},{\"queryRef\":\"Measures.Profit Margin %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"StockItems\"},{\"Name\":\"m\",\"Entity\":\"Measures\"}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"StockItemName\"},\"Name\":\"StockItems.StockItemName\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Quantity Sold\"},\"Name\":\"Measures.Total Quantity Sold\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Revenue\"},\"Name\":\"Measures.Total Revenue\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Profit\"},\"Name\":\"Measures.Total Profit\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Profit Margin %\"},\"Name\":\"Measures.Profit Margin %\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Total Revenue\"}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Product Sales Performance'\"}}}}}]}}}"
+    }
+  ]
+}

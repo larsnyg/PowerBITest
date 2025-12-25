@@ -1,0 +1,91 @@
+table Invoices
+	lineageTag: 7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b
+
+	column InvoiceID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 8f9a0b1c-2d3e-4f5a-6b7c-8d9e0f1a2b3c
+		summarizeBy: none
+		sourceColumn: InvoiceID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 9a0b1c2d-3e4f-5a6b-7c8d-9e0f1a2b3c4d
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 0b1c2d3e-4f5a-6b7c-8d9e-0f1a2b3c4d5e
+		summarizeBy: none
+		sourceColumn: OrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalespersonPersonID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 1c2d3e4f-5a6b-7c8d-9e0f-1a2b3c4d5e6f
+		summarizeBy: none
+		sourceColumn: SalespersonPersonID
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvoiceDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2d3e4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a
+		summarizeBy: none
+		sourceColumn: InvoiceDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCreditNote
+		dataType: boolean
+		formatString: "TRUE";"TRUE";"FALSE"
+		lineageTag: 3e4f5a6b-7c8d-9e0f-1a2b-3c4d5e6f7a8b
+		summarizeBy: none
+		sourceColumn: IsCreditNote
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalDryItems
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f5a6b7c-8d9e-0f1a-2b3c-4d5e6f7a8b9c
+		summarizeBy: sum
+		sourceColumn: TotalDryItems
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalChillerItems
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d
+		summarizeBy: sum
+		sourceColumn: TotalChillerItems
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Invoices = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("sql1.orb.local,1433", "WideWorldImporters-Full"),
+				    Sales_Invoices = Source{[Schema="Sales",Item="Invoices"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(Sales_Invoices,{"BillToCustomerID", "DeliveryMethodID", "ContactPersonID", "AccountsPersonID", "PackedByPersonID", "CustomerPurchaseOrderNumber", "CreditNoteReason", "Comments", "DeliveryInstructions", "InternalComments", "DeliveryRun", "RunPosition", "ReturnedDeliveryData", "ConfirmedDeliveryTime", "ConfirmedReceivedBy", "LastEditedBy", "LastEditedWhen"})
+				in
+				    #"Removed Columns"
+
+		annotation PBI_ResultType = Table
+

@@ -1,0 +1,71 @@
+table Orders
+	lineageTag: 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d
+
+	column OrderID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e
+		summarizeBy: none
+		sourceColumn: OrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalespersonPersonID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a
+		summarizeBy: none
+		sourceColumn: SalespersonPersonID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpectedDeliveryDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6f7a8b9c-0d1e-2f3a-4b5c-6d7e8f9a0b1c
+		summarizeBy: none
+		sourceColumn: ExpectedDeliveryDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerPurchaseOrderNumber
+		dataType: string
+		lineageTag: 7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d
+		summarizeBy: none
+		sourceColumn: CustomerPurchaseOrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Orders = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("sql1.orb.local,1433", "WideWorldImporters-Full"),
+				    Sales_Orders = Source{[Schema="Sales",Item="Orders"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(Sales_Orders,{"PickedByPersonID", "ContactPersonID", "BackorderOrderID", "IsUndersupplyBackordered", "Comments", "DeliveryInstructions", "InternalComments", "PickingCompletedWhen", "LastEditedBy", "LastEditedWhen"})
+				in
+				    #"Removed Columns"
+
+		annotation PBI_ResultType = Table
+

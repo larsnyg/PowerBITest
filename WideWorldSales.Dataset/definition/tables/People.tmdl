@@ -1,0 +1,66 @@
+table People
+	lineageTag: 5c6d7e8f-9a0b-1c2d-3e4f-5a6b7c8d9e0f
+
+	column PersonID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 6d7e8f9a-0b1c-2d3e-4f5a-6b7c8d9e0f1a
+		summarizeBy: none
+		sourceColumn: PersonID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FullName
+		dataType: string
+		lineageTag: 7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b
+		summarizeBy: none
+		sourceColumn: FullName
+
+		annotation SummarizationSetBy = Automatic
+
+	column PreferredName
+		dataType: string
+		lineageTag: 8f9a0b1c-2d3e-4f5a-6b7c-8d9e0f1a2b3c
+		summarizeBy: none
+		sourceColumn: PreferredName
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsSalesperson
+		dataType: boolean
+		formatString: "TRUE";"TRUE";"FALSE"
+		lineageTag: 9a0b1c2d-3e4f-5a6b-7c8d-9e0f1a2b3c4d
+		summarizeBy: none
+		sourceColumn: IsSalesperson
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		lineageTag: 0b1c2d3e-4f5a-6b7c-8d9e-0f1a2b3c4d5e
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: 1c2d3e4f-5a6b-7c8d-9e0f-1a2b3c4d5e6f
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	partition People = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("sql1.orb.local,1433", "WideWorldImporters-Full"),
+				    Application_People = Source{[Schema="Application",Item="People"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(Application_People,{"SearchName", "IsPermittedToLogon", "LogonName", "IsExternalLogonProvider", "HashedPassword", "IsSystemUser", "IsEmployee", "UserPreferences", "FaxNumber", "Photo", "CustomFields", "OtherLanguages", "LastEditedBy", "ValidFrom", "ValidTo"})
+				in
+				    #"Removed Columns"
+
+		annotation PBI_ResultType = Table
+

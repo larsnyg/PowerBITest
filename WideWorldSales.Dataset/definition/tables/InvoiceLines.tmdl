@@ -1,0 +1,107 @@
+table InvoiceLines
+	lineageTag: 6b7c8d9e-0f1a-2b3c-4d5e-6f7a8b9c0d1e
+
+	column InvoiceLineID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 7c8d9e0f-1a2b-3c4d-5e6f-7a8b9c0d1e2f
+		summarizeBy: none
+		sourceColumn: InvoiceLineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvoiceID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 8d9e0f1a-2b3c-4d5e-6f7a-8b9c0d1e2f3a
+		summarizeBy: none
+		sourceColumn: InvoiceID
+
+		annotation SummarizationSetBy = Automatic
+
+	column StockItemID
+		dataType: int64
+		isAvailable: false
+		formatString: 0
+		lineageTag: 9e0f1a2b-3c4d-5e6f-7a8b-9c0d1e2f3a4b
+		summarizeBy: none
+		sourceColumn: StockItemID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 0f1a2b3c-4d5e-6f7a-8b9c-0d1e2f3a4b5c
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: decimal
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaxRate
+		dataType: decimal
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f
+		summarizeBy: none
+		sourceColumn: TaxRate
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaxAmount
+		dataType: decimal
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a
+		summarizeBy: sum
+		sourceColumn: TaxAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineProfit
+		dataType: decimal
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b
+		summarizeBy: sum
+		sourceColumn: LineProfit
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExtendedPrice
+		dataType: decimal
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 6f7a8b9c-0d1e-2f3a-4b5c-6d7e8f9a0b1c
+		summarizeBy: sum
+		sourceColumn: ExtendedPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	partition InvoiceLines = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("sql1.orb.local,1433", "WideWorldImporters-Full"),
+				    Sales_InvoiceLines = Source{[Schema="Sales",Item="InvoiceLines"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(Sales_InvoiceLines,{"PackageTypeID", "LastEditedBy", "LastEditedWhen"})
+				in
+				    #"Removed Columns"
+
+		annotation PBI_ResultType = Table
+
