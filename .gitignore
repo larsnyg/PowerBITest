@@ -22,3 +22,8 @@ Thumbs.db
 
 # Windows
 desktop.ini
+
+# PowerShell Modules and Dependencies
+modules/.nuget/
+modules/FabricPS-PBIP.psm1
+modules/FabricPS-PBIP.psd1

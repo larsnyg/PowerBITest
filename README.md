@@ -129,13 +129,22 @@ To open and edit this project, you need:
 
 ## Deploying to Fabric
 
-This project can be deployed directly to Microsoft Fabric using the included PowerShell script:
+This project can be deployed directly to Microsoft Fabric:
 
+### Windows
 ```powershell
 .\Deploy-ToFabric.ps1 -WorkspaceName "Your Workspace Name"
 ```
 
-For detailed deployment instructions, prerequisites, and troubleshooting, see [FABRIC-DEPLOYMENT.md](FABRIC-DEPLOYMENT.md).
+### macOS/Linux
+Due to PowerShell console compatibility issues on macOS, use the manual deployment guide:
+```powershell
+# See DEPLOY-MANUALLY.md for step-by-step instructions
+```
+
+**Documentation:**
+- [FABRIC-DEPLOYMENT.md](FABRIC-DEPLOYMENT.md) - Automated deployment (Windows)
+- [DEPLOY-MANUALLY.md](DEPLOY-MANUALLY.md) - Manual deployment (macOS/Linux)
 
 ## Opening the Project
 
