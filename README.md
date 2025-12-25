@@ -1,12 +1,26 @@
 # WideWorld Sales Power BI Project
 
-This Power BI project connects to the WideWorldImporters-Full SQL Server database and provides sales analysis using the new TMDL (Tabular Model Definition Language) and PBIR (Power BI Enhanced Report) formats.
+This Power BI project (PBIP format) connects to the WideWorldImporters-Full SQL Server database and provides sales analysis using the new TMDL (Tabular Model Definition Language) and PBIR (Power BI Enhanced Report) formats.
+
+## Quick Start
+
+### Option 1: Open in Power BI Desktop
+1. Double-click `WideWorldSales.pbip` to open the project
+2. Enter database credentials when prompted
+3. Start analyzing!
+
+### Option 2: Deploy to Microsoft Fabric
+```powershell
+.\Deploy-ToFabric.ps1 -WorkspaceName "Sales Analytics"
+```
+See [FABRIC-DEPLOYMENT.md](FABRIC-DEPLOYMENT.md) for detailed deployment instructions.
 
 ## Project Structure
 
 ```
 PowerBITest/
-├── WideWorldSales.Dataset/          # TMDL Dataset
+├── WideWorldSales.pbip              # PBIP project file (entry point)
+├── WideWorldSales.SemanticModel/    # TMDL Semantic Model (Data Model)
 │   ├── .pbi/
 │   │   └── localSettings.json
 │   ├── definition/
@@ -108,9 +122,20 @@ To open and edit this project, you need:
 1. **Power BI Desktop** (latest version)
 2. **Enable Preview Features** in Power BI Desktop:
    - Go to: File → Options and settings → Options → Preview features
+   - Enable: "Power BI Project (.pbip) save option"
    - Enable: "Store semantic model using TMDL format"
    - Enable: "Store reports using enhanced metadata format (PBIR)"
 3. **Database Access**: Ensure you can connect to sql1.orb.local:1433
+
+## Deploying to Fabric
+
+This project can be deployed directly to Microsoft Fabric using the included PowerShell script:
+
+```powershell
+.\Deploy-ToFabric.ps1 -WorkspaceName "Your Workspace Name"
+```
+
+For detailed deployment instructions, prerequisites, and troubleshooting, see [FABRIC-DEPLOYMENT.md](FABRIC-DEPLOYMENT.md).
 
 ## Opening the Project
 
